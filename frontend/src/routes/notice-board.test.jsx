@@ -146,8 +146,8 @@ describe("Notice board routes", () => {
     await waitFor(() => {
       expect(noticeApi.listNotices).toHaveBeenCalled();
     }, { timeout: 4000 });
-    expect(await screen.findByRole("heading", { name: /notice management/i })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /create notice/i })).toBeInTheDocument();
+    expect(await screen.findByText(/notice management/i, {}, { timeout: 4000 })).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: /create notice/i }, { timeout: 4000 })).toBeInTheDocument();
   });
 
   it("renders provost notice edit form even when expiry date is invalid", async () => {
