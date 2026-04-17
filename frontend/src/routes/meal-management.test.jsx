@@ -107,7 +107,7 @@ describe("Meal management routes", () => {
       expect(mealApi.listDailyMenu).toHaveBeenCalled();
     }, { timeout: 4000 });
     expect(
-      await screen.findByRole("heading", { name: /daily menu/i }, { timeout: 4000 })
+      await screen.findByPlaceholderText(/search by item name or description/i, {}, { timeout: 4000 })
     ).toBeInTheDocument();
   });
 
