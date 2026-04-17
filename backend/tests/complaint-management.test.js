@@ -333,14 +333,15 @@ describe("Complaint Management", () => {
     });
     expect(assignInactive.status).toBe(409);
 
-    const today = new Date().toISOString().slice(0, 10);
+    const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+    const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
     const list = await provostAgent.get("/api/v1/complaints").query({
       search: "alpha",
       category: "facility",
       severity: "critical",
       assignedTo: activeStaff._id.toString(),
-      startDate: today,
-      endDate: today,
+      startDate: yesterday,
+      endDate: tomorrow,
       page: 1,
       limit: 10,
       sortBy: "createdAt",

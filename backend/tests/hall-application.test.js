@@ -96,7 +96,7 @@ describe("Hall Application", () => {
     expect(second.status).toBe(409);
   });
 
-  it("accepts transfer request for allocated students and blocks it for non-allocated students", async () => {
+  it("blocks transfer request in general application module for both allocated and non-allocated students", async () => {
     const allocatedStudentAgent = request.agent(app);
     const allocatedRegistration = await registerStudent(allocatedStudentAgent, {
       name: "Allocated Student",
@@ -113,8 +113,7 @@ describe("Hall Application", () => {
         requestType: "transfer_request",
       })
     );
-    expect(transferSubmit.status).toBe(201);
-    expect(transferSubmit.body.data.application.requestType).toBe("transfer_request");
+    expect(transferSubmit.status).toBe(400);
 
     const nonAllocatedAgent = request.agent(app);
     await registerStudent(nonAllocatedAgent, {

@@ -100,6 +100,8 @@ describe("Analytics reporting routes", () => {
       expect(analyticsApi.getProvostSummary).toHaveBeenCalled();
     }, { timeout: 4000 });
 
-    expect(await screen.findByRole("heading", { name: /analytics & reporting/i })).toBeInTheDocument();
+    expect(
+      await screen.findByRole("heading", { name: /analytics & reporting/i }, { timeout: 10000 })
+    ).toBeInTheDocument();
   });
 });

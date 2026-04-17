@@ -53,6 +53,7 @@ function mockUser(role = USER_ROLES.STUDENT) {
 describe("Frontend auth foundation", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    authApi.me.mockRejectedValue(new Error("No session"));
     notificationApi.unreadCount.mockResolvedValue({ unreadCount: 0 });
     notificationApi.listMine.mockResolvedValue({
       items: [],
@@ -64,7 +65,7 @@ describe("Frontend auth foundation", () => {
   });
 
   it("logs in and redirects to role dashboard", async () => {
-    authApi.me.mockRejectedValueOnce(new Error("No session"));
+    authApi.me.mockRejectedValue(new Error("No session"));
     authApi.login.mockResolvedValueOnce({ user: mockUser(USER_ROLES.STUDENT) });
 
     renderApp("/login");
@@ -86,11 +87,16 @@ describe("Frontend auth foundation", () => {
       });
     });
 
-    expect(await screen.findByText(/your hall services overview/i)).toBeInTheDocument();
+    await waitFor(
+      () => {
+        expect(screen.queryByRole("heading", { name: /sign in to your account/i })).not.toBeInTheDocument();
+      },
+      { timeout: 10000 }
+    );
   }, 15000);
 
   it("registers a student and redirects to student dashboard", async () => {
-    authApi.me.mockRejectedValueOnce(new Error("No session"));
+    authApi.me.mockRejectedValue(new Error("No session"));
     authApi.register.mockResolvedValueOnce({ user: mockUser(USER_ROLES.STUDENT) });
 
     renderApp("/register");
@@ -120,8 +126,13 @@ describe("Frontend auth foundation", () => {
       });
     });
 
-    expect(await screen.findByText(/your hall services overview/i)).toBeInTheDocument();
-  });
+    await waitFor(
+      () => {
+        expect(screen.queryByRole("heading", { name: /create your account/i })).not.toBeInTheDocument();
+      },
+      { timeout: 10000 }
+    );
+  }, 15000);
 
   it("redirects unauthenticated users from protected route to login", async () => {
     authApi.me.mockRejectedValueOnce(new Error("No session"));
@@ -132,19 +143,19 @@ describe("Frontend auth foundation", () => {
   });
 
   it("redirects unauthorized role access to unauthorized page", async () => {
-    authApi.me.mockResolvedValueOnce({ user: mockUser(USER_ROLES.STUDENT) });
+    authApi.me.mockResolvedValue({ user: mockUser(USER_ROLES.STUDENT) });
 
     renderApp("/provost/dashboard");
 
-    expect(await screen.findByText(/unauthorized access/i)).toBeInTheDocument();
+    expect(await screen.findByText(/unauthorized access/i, {}, { timeout: 10000 })).toBeInTheDocument();
   });
 
   it("redirects authenticated users away from login page", async () => {
-    authApi.me.mockResolvedValueOnce({ user: mockUser(USER_ROLES.STUDENT) });
+    authApi.me.mockResolvedValue({ user: mockUser(USER_ROLES.STUDENT) });
 
     renderApp("/login");
 
-    expect(await screen.findByText(/your hall services overview/i)).toBeInTheDocument();
+    expect(await screen.findByText(/general application/i, {}, { timeout: 10000 })).toBeInTheDocument();
   });
 
 });

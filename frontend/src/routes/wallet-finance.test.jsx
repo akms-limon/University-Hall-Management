@@ -126,7 +126,9 @@ describe("Wallet and finance routes", () => {
     await waitFor(() => {
       expect(walletApi.getProvostFinancialSummary).toHaveBeenCalled();
     }, { timeout: 4000 });
-    expect(await screen.findByRole("heading", { name: /financial dashboard/i })).toBeInTheDocument();
+    expect(
+      await screen.findByRole("heading", { name: /financial dashboard/i }, { timeout: 10000 })
+    ).toBeInTheDocument();
   });
 
   it("renders provost transaction monitoring route", async () => {

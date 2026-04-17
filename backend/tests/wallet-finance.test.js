@@ -55,25 +55,31 @@ describe("Wallet, Deposit and Token Payment", () => {
   it("creates deposit and increases student wallet balance", async () => {
     const studentAgent = request.agent(app);
     const studentUser = await registerStudent(studentAgent, "wallet-deposit");
+    const previousProvider = env.PAYMENT_PROVIDER;
+    env.PAYMENT_PROVIDER = "sandbox";
 
-    const deposit = await studentAgent.post("/api/v1/wallet/me/deposits").send({
-      amount: 1500,
-      paymentMethod: "bkash",
-      remarks: "Initial topup",
-    });
+    try {
+      const deposit = await studentAgent.post("/api/v1/wallet/me/deposits").send({
+        amount: 1500,
+        paymentMethod: "bkash",
+        remarks: "Initial topup",
+      });
 
-    expect(deposit.status).toBe(201);
-    expect(deposit.body.data.transaction.transactionType).toBe("deposit");
-    expect(deposit.body.data.transaction.status).toBe("completed");
+      expect(deposit.status).toBe(201);
+      expect(deposit.body.data.transaction.transactionType).toBe("deposit");
+      expect(deposit.body.data.transaction.status).toBe("completed");
 
-    const studentProfile = await Student.findOne({ userId: studentUser.id }).lean();
-    expect(Number(studentProfile.balance || 0)).toBe(1500);
+      const studentProfile = await Student.findOne({ userId: studentUser.id }).lean();
+      expect(Number(studentProfile.balance || 0)).toBe(1500);
 
-    const notification = await Notification.findOne({
-      recipient: studentUser.id,
-      type: "wallet_deposit_success",
-    }).lean();
-    expect(notification).toBeTruthy();
+      const notification = await Notification.findOne({
+        recipient: studentUser.id,
+        type: "wallet_deposit_success",
+      }).lean();
+      expect(notification).toBeTruthy();
+    } finally {
+      env.PAYMENT_PROVIDER = previousProvider;
+    }
   });
 
   it("initiates SSLCommerz deposit as pending and credits wallet after verified success callback", async () => {
@@ -184,31 +190,37 @@ describe("Wallet, Deposit and Token Payment", () => {
 
     const studentAgent = request.agent(app);
     const studentUser = await registerStudent(studentAgent, "wallet-token-purchase");
+    const previousProvider = env.PAYMENT_PROVIDER;
+    env.PAYMENT_PROVIDER = "sandbox";
 
-    const deposit = await studentAgent.post("/api/v1/wallet/me/deposits").send({
-      amount: 500,
-      paymentMethod: "bkash",
-    });
-    expect(deposit.status).toBe(201);
+    try {
+      const deposit = await studentAgent.post("/api/v1/wallet/me/deposits").send({
+        amount: 500,
+        paymentMethod: "bkash",
+      });
+      expect(deposit.status).toBe(201);
 
-    const purchase = await studentAgent.post("/api/v1/meals/orders/me").send({
-      foodItemId: createItem.body.data.item.id,
-      validDate: tomorrowDate(),
-      quantity: 1,
-    });
-    expect(purchase.status).toBe(201);
-    expect(purchase.body.data.order.paymentStatus).toBe("paid");
+      const purchase = await studentAgent.post("/api/v1/meals/orders/me").send({
+        foodItemId: createItem.body.data.item.id,
+        validDate: tomorrowDate(),
+        quantity: 1,
+      });
+      expect(purchase.status).toBe(201);
+      expect(purchase.body.data.order.paymentStatus).toBe("paid");
 
-    const studentProfile = await Student.findOne({ userId: studentUser.id }).lean();
-    expect(Number(studentProfile.balance || 0)).toBe(280);
+      const studentProfile = await Student.findOne({ userId: studentUser.id }).lean();
+      expect(Number(studentProfile.balance || 0)).toBe(280);
 
-    const mealTx = await Transaction.findOne({
-      mealOrder: purchase.body.data.order.id,
-      transactionType: "meal_token",
-      status: "completed",
-    }).lean();
-    expect(mealTx).toBeTruthy();
-    expect(Number(mealTx.amount || 0)).toBe(220);
+      const mealTx = await Transaction.findOne({
+        mealOrder: purchase.body.data.order.id,
+        transactionType: "meal_token",
+        status: "completed",
+      }).lean();
+      expect(mealTx).toBeTruthy();
+      expect(Number(mealTx.amount || 0)).toBe(220);
+    } finally {
+      env.PAYMENT_PROVIDER = previousProvider;
+    }
   });
 
   it("serves student, staff, and provost finance endpoints with role protection", async () => {

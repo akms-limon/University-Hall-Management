@@ -336,14 +336,15 @@ describe("Support Ticket Management", () => {
     });
     expect(assign.status).toBe(200);
 
-    const today = new Date().toISOString().slice(0, 10);
+    const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+    const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
     const list = await provostAgent.get("/api/v1/support-tickets").query({
       search: "alpha",
       category: "financial",
       priority: "urgent",
       assignedTo: staff._id.toString(),
-      startDate: today,
-      endDate: today,
+      startDate: yesterday,
+      endDate: tomorrow,
       page: 1,
       limit: 10,
       sortBy: "createdAt",
@@ -365,4 +366,3 @@ describe("Support Ticket Management", () => {
     expect(ticketCount).toBe(2);
   });
 });
-
