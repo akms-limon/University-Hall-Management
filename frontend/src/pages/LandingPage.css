@@ -92,6 +92,7 @@
 }
 
 .classic-nav .nav-links { display: flex; gap: 0; }
+.classic-nav .nav-mobile { display: contents; }
 .classic-nav .nav-toggle {
   display: none;
   min-height: 40px;
@@ -564,6 +565,7 @@ footer ul li a:hover { color: var(--gold-light); }
   .stats-inner { grid-template-columns: repeat(2, 1fr); }
   .stat-item:nth-child(2) { border-right: none; }
   .footer-inner { grid-template-columns: 1fr 1fr; }
+  .classic-nav .nav-mobile { display: block; }
   .classic-nav .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
   .classic-nav .nav-inner { position: relative; }
   .classic-nav .nav-links {

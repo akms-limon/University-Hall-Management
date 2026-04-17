@@ -18,6 +18,8 @@ function SidebarNavItem({ item, role, compact = false, onNavigate }) {
       to={item.path}
       end={shouldUseExactNavMatch(role, item.path)}
       onClick={onNavigate}
+      onMouseUp={onNavigate}
+      onTouchEnd={onNavigate}
       title={compact ? item.label : undefined}
       className={({ isActive }) =>
         cn(

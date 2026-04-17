@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import moznuPhoto from "@/assets/moznu.jpg";
 import smrHallImage from "@/assets/smrhall.jpg";
@@ -69,6 +69,7 @@ function LandingPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const mobileMenuRef = useRef(null);
 
   const loadHomepage = useCallback(async () => {
     setIsLoading(true);
@@ -98,10 +99,27 @@ function LandingPage() {
         setIsMobileNavOpen(false);
       }
     };
+    const handleHashChange = () => {
+      setIsMobileNavOpen(false);
+    };
+    const handleOutsideClick = (event) => {
+      if (!isMobileNavOpen) return;
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
+        setIsMobileNavOpen(false);
+      }
+    };
 
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    window.addEventListener("hashchange", handleHashChange);
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("touchstart", handleOutsideClick, { passive: true });
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("hashchange", handleHashChange);
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("touchstart", handleOutsideClick);
+    };
+  }, [isMobileNavOpen]);
 
   const recentNotices = useMemo(() => homepageData.notices.slice(0, 4), [homepageData.notices]);
   const upcomingEvents = useMemo(() => {
@@ -129,22 +147,31 @@ function LandingPage() {
               <span>{appMeta.universityName}</span>
             </div>
           </a>
-          <button
-            type="button"
-            className="nav-toggle"
-            aria-expanded={isMobileNavOpen}
-            aria-label="Toggle navigation menu"
-            onClick={() => setIsMobileNavOpen((prev) => !prev)}
-          >
-            {isMobileNavOpen ? "Close" : "Menu"}
-          </button>
-          <div className={`nav-links${isMobileNavOpen ? " open" : ""}`}>
-            <a href="#about" onClick={() => setIsMobileNavOpen(false)}>About</a>
-            <a href="#notices" onClick={() => setIsMobileNavOpen(false)}>Notices</a>
-            <a href="#facilities" onClick={() => setIsMobileNavOpen(false)}>Facilities</a>
-            <a href="#administration" onClick={() => setIsMobileNavOpen(false)}>Administration</a>
-            <a href="#contact" onClick={() => setIsMobileNavOpen(false)}>Contact</a>
-            <Link to="/login" onClick={() => setIsMobileNavOpen(false)}>Login</Link>
+          <div className="nav-mobile" ref={mobileMenuRef}>
+            <button
+              type="button"
+              className="nav-toggle"
+              aria-expanded={isMobileNavOpen}
+              aria-label="Toggle navigation menu"
+              onClick={() => setIsMobileNavOpen((prev) => !prev)}
+            >
+              {isMobileNavOpen ? "Close" : "Menu"}
+            </button>
+            <div
+              className={`nav-links${isMobileNavOpen ? " open" : ""}`}
+              onClick={(event) => {
+                if (event.target.closest("a")) {
+                  setIsMobileNavOpen(false);
+                }
+              }}
+            >
+              <a href="#about">About</a>
+              <a href="#notices">Notices</a>
+              <a href="#facilities">Facilities</a>
+              <a href="#administration">Administration</a>
+              <a href="#contact">Contact</a>
+              <Link to="/login">Login</Link>
+            </div>
           </div>
         </div>
       </nav>
