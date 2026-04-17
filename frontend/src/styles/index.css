@@ -1,0 +1,213 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-deep: 253 248 240;
+  --bg-card: 255 255 255;
+  --bg-muted: 243 234 216;
+  --text-base: 26 26 26;
+  --text-soft: 44 44 44;
+  --text-muted: 78 78 78;
+  --ui-border: 201 162 39;
+  --ui-border-strong: 201 162 39;
+  --ui-ring: 39 168 110;
+  --accent-primary: 10 61 46;
+  --accent-secondary: 20 90 62;
+  --accent-success: 39 168 110;
+  --accent-warning: 201 162 39;
+  --accent-danger: 200 68 68;
+  --shadow-soft: 0 10px 28px rgba(26, 26, 26, 0.08);
+  --bg-glow-1: 0;
+  --bg-glow-2: 0;
+  --bg-glow-3: 0;
+  --role-accent-text: rgb(20 90 62);
+  --role-accent-soft: rgba(39, 168, 110, 0.1);
+  --role-accent-border: rgba(201, 162, 39, 0.35);
+  --role-accent-shadow: 0 4px 12px rgba(20, 90, 62, 0.2);
+}
+
+html.theme-dark {
+  color-scheme: light;
+  --bg-deep: 253 248 240;
+  --bg-card: 255 255 255;
+  --bg-muted: 243 234 216;
+  --text-base: 26 26 26;
+  --text-soft: 44 44 44;
+  --text-muted: 78 78 78;
+  --ui-border: 201 162 39;
+  --ui-border-strong: 201 162 39;
+  --ui-ring: 39 168 110;
+  --accent-primary: 10 61 46;
+  --accent-secondary: 20 90 62;
+  --accent-success: 39 168 110;
+  --accent-warning: 201 162 39;
+  --accent-danger: 200 68 68;
+  --shadow-soft: 0 10px 28px rgba(26, 26, 26, 0.08);
+  --bg-glow-1: 0;
+  --bg-glow-2: 0;
+  --bg-glow-3: 0;
+}
+
+html.theme-light {
+  color-scheme: light;
+  --bg-deep: 253 248 240;
+  --bg-card: 255 255 255;
+  --bg-muted: 243 234 216;
+  --text-base: 26 26 26;
+  --text-soft: 44 44 44;
+  --text-muted: 78 78 78;
+  --ui-border: 201 162 39;
+  --ui-border-strong: 201 162 39;
+  --ui-ring: 39 168 110;
+  --accent-primary: 10 61 46;
+  --accent-secondary: 20 90 62;
+  --accent-success: 39 168 110;
+  --accent-warning: 201 162 39;
+  --accent-danger: 200 68 68;
+  --shadow-soft: 0 10px 28px rgba(26, 26, 26, 0.08);
+  --bg-glow-1: 0;
+  --bg-glow-2: 0;
+  --bg-glow-3: 0;
+}
+
+html[data-role="student"] {
+  --role-accent-text: rgb(20 90 62);
+  --role-accent-soft: rgba(39, 168, 110, 0.1);
+  --role-accent-border: rgba(201, 162, 39, 0.28);
+  --role-accent-shadow: 0 4px 12px rgba(20, 90, 62, 0.2);
+}
+
+html[data-role="staff"] {
+  --role-accent-text: rgb(10 61 46);
+  --role-accent-soft: rgba(20, 90, 62, 0.12);
+  --role-accent-border: rgba(201, 162, 39, 0.32);
+  --role-accent-shadow: 0 4px 12px rgba(10, 61, 46, 0.22);
+}
+
+html[data-role="provost"] {
+  --role-accent-text: rgb(10 61 46);
+  --role-accent-soft: rgba(201, 162, 39, 0.12);
+  --role-accent-border: rgba(201, 162, 39, 0.34);
+  --role-accent-shadow: 0 4px 12px rgba(10, 61, 46, 0.24);
+}
+
+html[data-role="guest"] {
+  --role-accent-text: rgb(20 90 62);
+  --role-accent-soft: rgba(201, 162, 39, 0.12);
+  --role-accent-border: rgba(201, 162, 39, 0.3);
+  --role-accent-shadow: 0 4px 12px rgba(20, 90, 62, 0.2);
+}
+
+html.theme-light[data-role="student"] {
+  --role-accent-soft: rgba(39, 168, 110, 0.12);
+}
+
+html.theme-light[data-role="staff"] {
+  --role-accent-soft: rgba(20, 90, 62, 0.12);
+}
+
+html.theme-light[data-role="provost"] {
+  --role-accent-soft: rgba(201, 162, 39, 0.12);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-bg-deep font-sans antialiased;
+  font-family: "Source Sans 3", sans-serif;
+  color: rgb(var(--text-base));
+  margin: 0;
+  overflow-x: hidden;
+  background-image: none;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--ui-border-strong), 0.55) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(var(--ui-border-strong), 0.55);
+  border-radius: 9999px;
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8;
+  }
+
+  .card-soft {
+    @apply rounded-2xl border bg-bg-card/85;
+    border-color: rgb(var(--ui-border) / 0.65);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .table-cell {
+    @apply px-4 py-3;
+  }
+}
+
+html.theme-light [class*="text-slate-100"],
+html.theme-light [class*="text-slate-200"] {
+  color: rgb(var(--text-base)) !important;
+}
+
+html.theme-light [class*="text-slate-300"] {
+  color: rgb(var(--text-base)) !important;
+}
+
+html.theme-light [class*="text-slate-400"],
+html.theme-light [class*="text-slate-500"] {
+  color: rgb(var(--text-soft)) !important;
+}
+
+html.theme-dark [class*="text-slate-100"],
+html.theme-dark [class*="text-slate-200"] {
+  color: rgb(var(--text-base)) !important;
+}
+
+html.theme-dark [class*="text-slate-300"] {
+  color: rgb(var(--text-base)) !important;
+}
+
+html.theme-dark [class*="text-slate-400"],
+html.theme-dark [class*="text-slate-500"] {
+  color: rgb(var(--text-soft)) !important;
+}
+
+html.theme-light [class*="bg-slate-900"],
+html.theme-light [class*="bg-slate-800"],
+html.theme-light [class*="bg-slate-700"] {
+  background-color: rgb(var(--bg-muted) / 0.76) !important;
+}
+
+html.theme-light [class*="border-slate-700"],
+html.theme-light [class*="border-slate-600"],
+html.theme-light [class*="border-slate-500"] {
+  border-color: rgb(var(--ui-border) / 0.78) !important;
+}
+
+html.theme-light [class*="hover:bg-slate-700"]:hover,
+html.theme-light [class*="hover:bg-slate-800"]:hover,
+html.theme-light [class*="hover:bg-slate-900"]:hover {
+  background-color: rgb(var(--bg-muted) / 0.95) !important;
+}
+
+html.theme-light [class*="hover:text-slate-100"]:hover,
+html.theme-light [class*="hover:text-slate-200"]:hover,
+html.theme-light [class*="hover:text-slate-300"]:hover {
+  color: rgb(var(--text-base)) !important;
+}
