@@ -206,7 +206,7 @@ function StudentRoomAvailabilityPage() {
                       <StatusBadge tone={roomStatusTone(room.status)}>{roomStatusLabel(room.status)}</StatusBadge>
                     </div>
 
-                    <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
+                    <dl className="mt-3 grid grid-cols-1 gap-2 text-xs sm:grid-cols-2">
                       <div>
                         <dt className="text-slate-500">Capacity</dt>
                         <dd>{room.capacity}</dd>

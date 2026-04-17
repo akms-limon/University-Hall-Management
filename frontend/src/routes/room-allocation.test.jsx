@@ -134,6 +134,49 @@ describe("Room allocation routes", () => {
     expect(screen.getByRole("button", { name: /new room request/i })).toBeInTheDocument();
   });
 
+  it("shows transfer request action when student already has allocation eligibility", async () => {
+    authApi.me.mockResolvedValue({ user: mockUser(USER_ROLES.STUDENT) });
+    studentApi.getMyProfile.mockResolvedValue({
+      student: {
+        allocationStatus: "allocated",
+        currentRoom: "A-101",
+      },
+    });
+    roomAllocationApi.listMyAllocations.mockResolvedValue({
+      items: [
+        {
+          id: "alloc-1",
+          status: "approved",
+          room: { id: "room-1", roomNumber: "A-101" },
+          semester: 5,
+          allocationYear: 2026,
+          allocationDate: "2026-04-17T00:00:00.000Z",
+          releaseDate: null,
+        },
+      ],
+      summary: {
+        totalAllocations: 1,
+        totalNewRequests: 1,
+        totalTransferRequests: 0,
+        pending: 0,
+        approved: 1,
+        rejected: 0,
+        active: 0,
+        completed: 0,
+      },
+      meta: {
+        page: 1,
+        limit: 10,
+        total: 1,
+        totalPages: 1,
+      },
+    });
+
+    renderApp("/student/room-allocation");
+
+    expect(await screen.findByRole("button", { name: /transfer request/i })).toBeInTheDocument();
+  });
+
   it("renders provost room allocation management page and loads allocation queue", async () => {
     authApi.me.mockResolvedValue({ user: mockUser(USER_ROLES.PROVOST) });
     roomAllocationApi.listAllocations.mockResolvedValue({

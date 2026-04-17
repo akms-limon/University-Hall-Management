@@ -38,7 +38,7 @@ function Modal({ open, onClose, title, children, footer }) {
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 20, opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.2 }}
-            className="relative max-h-[calc(100dvh-2rem)] w-full max-w-lg overflow-y-auto rounded-2xl border border-[color:rgb(var(--ui-border)/0.7)] bg-[rgb(var(--bg-card)/0.98)] p-5 shadow-[0_24px_40px_rgba(2,6,23,0.2)]"
+            className="relative max-h-[calc(100dvh-1.25rem)] w-full max-w-lg overflow-y-auto rounded-2xl border border-[color:rgb(var(--ui-border)/0.7)] bg-[rgb(var(--bg-card)/0.98)] p-4 shadow-[0_24px_40px_rgba(2,6,23,0.2)] sm:max-h-[calc(100dvh-2rem)] sm:p-5"
           >
             <div className="flex items-start justify-between gap-3">
               <h3 className="text-lg font-semibold">{title}</h3>

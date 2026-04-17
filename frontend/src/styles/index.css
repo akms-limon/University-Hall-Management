@@ -4,6 +4,18 @@
 @tailwind utilities;
 
 :root {
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.25rem;
+  --space-xl: 1.5rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
   --bg-deep: 253 248 240;
   --bg-card: 255 255 255;
   --bg-muted: 243 234 216;
@@ -118,6 +130,10 @@ body,
   height: 100%;
 }
 
+html {
+  font-size: clamp(15px, 0.2vw + 14.5px, 16px);
+}
+
 body {
   @apply bg-bg-deep font-sans antialiased;
   font-family: "Source Sans 3", sans-serif;
@@ -127,11 +143,27 @@ body {
   background-image: none;
   line-height: 1.5;
   letter-spacing: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
 }
 
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(var(--ui-border-strong), 0.55) transparent;
+}
+
+*,
+*::before,
+*::after {
+  min-width: 0;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
 }
 
 *::-webkit-scrollbar {
@@ -146,7 +178,7 @@ body {
 
 @layer components {
   .container-page {
-    @apply mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-[1360px] px-3 sm:px-5 lg:px-8;
   }
 
   .card-soft {
@@ -157,6 +189,13 @@ body {
 
   .table-cell {
     @apply px-4 py-3;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-page {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 }
 

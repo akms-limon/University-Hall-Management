@@ -28,7 +28,7 @@ function FilePickerField({
       {error ? <p className="mt-1 text-xs text-red-300">{error}</p> : null}
 
       {previewUrls.length ? (
-        <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
+        <div className="mt-2 grid grid-cols-1 gap-2 min-[420px]:grid-cols-2 sm:grid-cols-3">
           {previewUrls.map((url) => (
             <a
               key={url}

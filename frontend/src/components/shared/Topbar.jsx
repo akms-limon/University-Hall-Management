@@ -9,23 +9,23 @@ import UniversityLogo from "@/components/shared/UniversityLogo";
 function Topbar({ onOpenSidebar }) {
   return (
     <header className="z-20 shrink-0 border-b border-[color:rgb(var(--ui-border)/0.3)] bg-[rgb(var(--accent-primary))] text-white">
-      <div className="container-page flex h-[4.25rem] items-center gap-3">
+      <div className="container-page flex min-h-[4.25rem] items-center gap-2 py-2 sm:gap-3 sm:py-0">
         <button
           type="button"
-          className="grid h-9 w-9 place-items-center rounded-[5px] border border-[rgba(var(--accent-warning),0.45)] bg-[rgba(var(--accent-warning),0.14)] text-[rgb(var(--accent-warning))] lg:hidden"
+          className="grid h-11 w-11 place-items-center rounded-[5px] border border-[rgba(var(--accent-warning),0.45)] bg-[rgba(var(--accent-warning),0.14)] text-[rgb(var(--accent-warning))] lg:hidden sm:h-9 sm:w-9"
           onClick={onOpenSidebar}
           aria-label="Open sidebar"
         >
           <Menu size={16} />
         </button>
 
-        <div className="flex min-w-0 shrink-0 items-center gap-2 pr-2">
+        <div className="flex min-w-0 shrink items-center gap-2 pr-1 sm:pr-2">
           <UniversityLogo className="h-8 w-8 rounded-md" fallbackClassName="h-8 w-8 rounded-md text-[10px]" />
           <div className="min-w-0">
-            <p className="max-w-[10.5rem] truncate text-sm font-display font-semibold sm:max-w-[16rem] sm:text-[15px]">
+            <p className="max-w-[8.5rem] truncate text-[13px] font-display font-semibold sm:max-w-[16rem] sm:text-[15px]">
               {appMeta.hallName}
             </p>
-            <p className="max-w-[10.5rem] truncate text-[11px] text-[rgba(255,255,255,0.72)] sm:max-w-[16rem]">
+            <p className="hidden max-w-[16rem] truncate text-[11px] text-[rgba(255,255,255,0.72)] sm:block">
               {appMeta.universityName}
             </p>
           </div>
@@ -36,7 +36,7 @@ function Topbar({ onOpenSidebar }) {
           <Input placeholder={`Search ${appMeta.shortName}...`} className="border-[rgba(var(--accent-warning),0.34)] bg-[rgba(255,255,255,0.08)] pl-8 text-white placeholder:text-[rgba(255,255,255,0.55)]" />
         </div>
 
-        <div className="ml-auto flex shrink-0 items-center gap-2">
+        <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
           <ThemeToggle />
           <NotificationMenu />
           <AvatarMenu />

@@ -13,9 +13,9 @@ const styles = {
 };
 
 const sizes = {
-  sm: "h-8 px-3 text-xs",
-  md: "h-9 px-3.5 text-sm",
-  lg: "h-10 px-4 text-sm",
+  sm: "h-10 px-3 text-xs sm:h-8",
+  md: "h-11 px-3.5 text-sm sm:h-9",
+  lg: "h-12 px-4 text-sm sm:h-10",
 };
 
 const Button = forwardRef(

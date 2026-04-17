@@ -170,7 +170,7 @@ function ProvostStudentDetailsPage() {
                 </div>
                 <div className="flex items-start justify-between gap-3">
                   <dt className="text-slate-400">Profile Photo</dt>
-                  <dd className="max-w-[260px] text-right">
+                  <dd className="max-w-[260px] text-left sm:text-right">
                     {student.profilePhoto ? (
                       <div>
                         <img

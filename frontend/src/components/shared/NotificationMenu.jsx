@@ -111,7 +111,7 @@ function NotificationMenu() {
     <div className="relative" ref={rootRef}>
       <button
         type="button"
-        className="relative grid h-9 w-9 place-items-center rounded-[5px] border border-[rgba(var(--accent-warning),0.7)] bg-[rgb(var(--accent-warning))] text-[rgb(var(--accent-primary))] shadow-[0_4px_10px_rgba(201,162,39,0.35)] hover:brightness-105"
+        className="relative grid h-11 w-11 place-items-center rounded-[5px] border border-[rgba(var(--accent-warning),0.7)] bg-[rgb(var(--accent-warning))] text-[rgb(var(--accent-primary))] shadow-[0_4px_10px_rgba(201,162,39,0.35)] hover:brightness-105 sm:h-9 sm:w-9"
         aria-label="Notifications"
         aria-expanded={open}
         onClick={() => setOpen((prev) => !prev)}
@@ -125,7 +125,7 @@ function NotificationMenu() {
       </button>
 
       {open ? (
-        <div className="absolute right-0 z-40 mt-2 w-80 max-w-[92vw] rounded-[8px] border border-[color:rgb(var(--ui-border)/0.3)] bg-[rgb(var(--bg-card)/0.98)] p-2 shadow-[var(--shadow-soft)]">
+        <div className="fixed inset-x-2 top-[4.75rem] z-40 mt-0 w-auto rounded-[8px] border border-[color:rgb(var(--ui-border)/0.3)] bg-[rgb(var(--bg-card)/0.98)] p-2 shadow-[var(--shadow-soft)] sm:absolute sm:inset-x-auto sm:right-0 sm:top-auto sm:mt-2 sm:w-80 sm:max-w-[92vw]">
           <div className="mb-2 flex items-center justify-between gap-2 px-2 pt-1">
             <p className="text-sm font-semibold">Notifications</p>
             <div className="flex items-center gap-2">
@@ -150,7 +150,7 @@ function NotificationMenu() {
           </div>
 
           {isLoading ? <p className="px-2 py-6 text-xs text-[rgb(var(--text-muted))]">Loading notifications...</p> : null}
-          {!isLoading && error ? <p className="px-2 py-6 text-xs text-red-300">{error}</p> : null}
+          {!isLoading && error ? <p className="px-2 py-6 text-xs text-red-700">{error}</p> : null}
 
           {!isLoading && !error && !items.length ? (
             <p className="px-2 py-6 text-xs text-[rgb(var(--text-muted))]">No notifications yet.</p>

@@ -10,13 +10,14 @@ function PaginationControls({ page = 1, totalPages = 0, onPageChange }) {
       <p className="text-xs text-[rgb(var(--text-muted))]">
         Page {page} of {totalPages}
       </p>
-      <div className="flex items-center gap-2">
-        <Button variant="secondary" size="sm" disabled={page <= 1} onClick={() => onPageChange(page - 1)}>
+      <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:items-center">
+        <Button variant="secondary" size="sm" className="w-full sm:w-auto" disabled={page <= 1} onClick={() => onPageChange(page - 1)}>
           Previous
         </Button>
         <Button
           variant="secondary"
           size="sm"
+          className="w-full sm:w-auto"
           disabled={page >= totalPages}
           onClick={() => onPageChange(page + 1)}
         >

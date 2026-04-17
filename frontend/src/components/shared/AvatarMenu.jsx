@@ -37,7 +37,7 @@ function AvatarMenu() {
     <div className="relative" ref={rootRef}>
       <button
         type="button"
-        className="inline-flex items-center gap-2 rounded-[5px] border border-[rgba(var(--accent-warning),0.45)] bg-[rgba(var(--accent-warning),0.14)] px-2 py-1.5 text-left text-[rgb(var(--accent-warning))] transition-colors hover:bg-[rgba(var(--accent-warning),0.2)]"
+        className="inline-flex h-11 items-center gap-2 rounded-[5px] border border-[rgba(var(--accent-warning),0.45)] bg-[rgba(var(--accent-warning),0.14)] px-2 text-left text-[rgb(var(--accent-warning))] transition-colors hover:bg-[rgba(var(--accent-warning),0.2)] sm:h-auto sm:py-1.5"
         onClick={() => setOpen((prev) => !prev)}
         aria-expanded={open}
       >
@@ -46,11 +46,11 @@ function AvatarMenu() {
           <span className="block text-xs font-semibold">{user.name}</span>
           <span className="block text-[11px] text-[rgba(255,255,255,0.76)]">{roleLabels[user.role]}</span>
         </span>
-        <ChevronDown size={14} className="text-[rgb(var(--accent-warning))]" />
+        <ChevronDown size={14} className="hidden text-[rgb(var(--accent-warning))] sm:block" />
       </button>
 
       {open ? (
-        <div className="absolute right-0 z-40 mt-2 w-56 rounded-xl border border-[color:rgb(var(--ui-border)/0.3)] bg-[rgb(var(--bg-card)/0.98)] p-2 shadow-[var(--shadow-soft)]">
+        <div className="fixed inset-x-2 top-[4.75rem] z-40 mt-0 w-auto rounded-xl border border-[color:rgb(var(--ui-border)/0.3)] bg-[rgb(var(--bg-card)/0.98)] p-2 shadow-[var(--shadow-soft)] sm:absolute sm:inset-x-auto sm:right-0 sm:top-auto sm:mt-2 sm:w-56">
           <Link
             to="/profile"
             onClick={() => setOpen(false)}

@@ -3,7 +3,7 @@ import Sidebar from "@/components/shared/Sidebar";
 
 function MobileSidebarDrawer({ open, onClose }) {
   return (
-    <Drawer open={open} onClose={onClose} widthClass="w-[84vw] max-w-[18rem]">
+    <Drawer open={open} onClose={onClose} widthClass="w-[88vw] max-w-[20rem]">
       <Sidebar onNavigate={onClose} mobile />
     </Drawer>
   );

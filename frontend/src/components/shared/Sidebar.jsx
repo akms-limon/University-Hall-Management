@@ -21,8 +21,8 @@ function SidebarNavItem({ item, role, compact = false, onNavigate }) {
       title={compact ? item.label : undefined}
       className={({ isActive }) =>
         cn(
-          "flex items-center rounded-[6px] border text-sm transition-all",
-          compact ? "justify-center px-2 py-2.5" : "gap-3 px-2.5 py-2",
+          "flex min-h-11 items-center rounded-[6px] border text-sm transition-all sm:min-h-0",
+          compact ? "justify-center px-2 py-2.5" : "gap-3 px-2.5 py-2.5 sm:py-2",
           isActive
             ? "border-[color:rgb(var(--ui-border)/0.42)] bg-[rgb(var(--bg-muted)/0.68)] text-[rgb(var(--accent-primary))]"
             : "border-transparent text-[rgb(var(--text-soft))] hover:bg-[rgb(var(--bg-muted)/0.5)] hover:text-[rgb(var(--accent-primary))]"
@@ -118,7 +118,7 @@ function Sidebar({ onNavigate, collapsed = false, onToggleCollapse, mobile = fal
                   onClick={() =>
                     setExpandedSectionId((current) => (current === group.id ? "" : group.id))
                   }
-                  className="flex w-full items-center justify-between rounded-[5px] px-2 py-1.5 text-left text-[11px] font-bold uppercase tracking-[0.09em] text-[rgb(var(--text-muted))] hover:bg-[rgb(var(--bg-muted)/0.48)]"
+                  className="flex min-h-11 w-full items-center justify-between rounded-[5px] px-2 py-2 text-left text-[11px] font-bold uppercase tracking-[0.09em] text-[rgb(var(--text-muted))] hover:bg-[rgb(var(--bg-muted)/0.48)] sm:min-h-0 sm:py-1.5"
                 >
                   <span>{group.label}</span>
                   {expanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}

@@ -146,8 +146,3 @@ cd ../frontend && npm run test
 - Architecture and route planning: `ARCHITECTURE.md`
 - Coding and API conventions: `CONVENTIONS.md`
 - Backend foundation details: `backend/docs/BACKEND_FOUNDATION.md`
-
-
-this is a checking for change...
-
-Ok

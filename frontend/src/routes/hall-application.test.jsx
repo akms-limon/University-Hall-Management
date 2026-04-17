@@ -178,6 +178,6 @@ describe("Hall application routes", () => {
     renderApp("/student/general-application/new");
 
     expect(await screen.findByText(/general application form/i, {}, { timeout: 10000 })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /submit application/i })).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: /submit application/i }, { timeout: 10000 })).toBeInTheDocument();
   });
 });
