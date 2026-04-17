@@ -131,7 +131,7 @@ describe("Room allocation routes", () => {
     await waitFor(() => {
       expect(roomAllocationApi.listMyAllocations).toHaveBeenCalled();
     }, { timeout: 4000 });
-    expect(screen.getByRole("button", { name: /new room request/i })).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: /new room request/i }, { timeout: 4000 })).toBeInTheDocument();
   });
 
   it("shows transfer request action when student already has allocation eligibility", async () => {
