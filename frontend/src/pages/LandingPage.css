@@ -413,33 +413,6 @@
 .facility-card h3 { font-family: "Playfair Display", serif; font-size: 17px; font-weight: 600; color: var(--green-dark); margin-bottom: 10px; }
 .facility-card p { font-size: 13.5px; color: var(--text-mid); line-height: 1.7; }
 
-.buildings-section { background: var(--green-dark); color: var(--white); }
-.buildings-section .section-eyebrow { color: var(--gold-light); }
-.buildings-section .section-title { color: var(--white); }
-.buildings-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-
-.building-item {
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(201, 162, 39, 0.2);
-  border-radius: 6px;
-  padding: 20px 22px;
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-}
-
-.building-num {
-  font-family: "Playfair Display", serif;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--gold);
-  line-height: 1;
-  flex-shrink: 0;
-  min-width: 28px;
-}
-
-.building-info h4 { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
-.building-info p { font-size: 12px; color: rgba(255, 255, 255, 0.55); line-height: 1.5; }
 
 .admin-section { background: var(--white); }
 .admin-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -581,7 +554,6 @@ footer ul li a:hover { color: var(--gold-light); }
   .stat-item:nth-child(2) { border-right: none; }
   .footer-inner { grid-template-columns: 1fr 1fr; }
   .classic-nav .nav-links { display: none; }
-  .buildings-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 600px) {

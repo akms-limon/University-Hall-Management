@@ -53,14 +53,6 @@ const facilityItems = [
   },
 ];
 
-const buildingItems = [
-  { title: "Main Building", description: "The central administrative and residential structure of the hall." },
-  { title: "Extension Building-1", description: "Expanded residential support for additional student accommodation." },
-  { title: "Extension Building-2", description: "Additional hall block to improve residential capacity and operations." },
-  { title: "Students' Centre Building", description: "Dedicated building for student welfare and community activities." },
-  { title: "House Tutor Quarters", description: "Residential and operational quarters for tutor-level administration." },
-];
-
 function formatDateParts(value) {
   const date = value ? new Date(value) : new Date();
   if (Number.isNaN(date.getTime())) {
@@ -129,7 +121,6 @@ function LandingPage() {
             <a href="#about">About</a>
             <a href="#notices">Notices</a>
             <a href="#facilities">Facilities</a>
-            <a href="#buildings">Buildings</a>
             <a href="#administration">Administration</a>
             <a href="#contact">Contact</a>
             <Link to="/login">Login</Link>
@@ -330,28 +321,6 @@ function LandingPage() {
         </div>
       </section>
 
-      <section className="buildings-section" id="buildings">
-        <div className="container">
-          <div className="section-eyebrow">Campus Infrastructure</div>
-          <h2 className="section-title">Hall Buildings</h2>
-          <div className="divider-gold dark" />
-          <p className="section-lead dark">
-            Hall infrastructure supports residential life, student services, administrative work, and activity operations.
-          </p>
-          <div className="buildings-grid">
-            {buildingItems.map((building, index) => (
-              <div className="building-item" key={building.title}>
-                <div className="building-num">{String(index + 1).padStart(2, "0")}</div>
-                <div className="building-info">
-                  <h4>{building.title}</h4>
-                  <p>{building.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="admin-section" id="administration">
         <div className="container">
           <div className="section-eyebrow">Hall Leadership</div>
@@ -440,7 +409,6 @@ function LandingPage() {
               <li><a href="#about">About the Hall</a></li>
               <li><a href="#notices">Notices</a></li>
               <li><a href="#facilities">Facilities</a></li>
-              <li><a href="#buildings">Buildings</a></li>
             </ul>
           </div>
           <div>
