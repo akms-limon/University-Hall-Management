@@ -10,6 +10,7 @@ import PageContainer from "@/components/shared/PageContainer";
 
 function AppShell({ children }) {
   const sidebar = useDisclosure(false);
+  const { close: closeSidebar } = sidebar;
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const { user } = useAuth();
   const location = useLocation();
@@ -20,8 +21,8 @@ function AppShell({ children }) {
   }, [user?.role]);
 
   useEffect(() => {
-    sidebar.close();
-  }, [location.pathname]);
+    closeSidebar();
+  }, [location.pathname, closeSidebar]);
 
   return (
     <div className="relative flex h-[100dvh] overflow-hidden">
