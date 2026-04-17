@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useDisclosure } from "@/hooks/useDisclosure";
 import { useAuth } from "@/hooks/useAuth";
 import Sidebar from "@/components/shared/Sidebar";
@@ -11,11 +12,16 @@ function AppShell({ children }) {
   const sidebar = useDisclosure(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const { user } = useAuth();
+  const location = useLocation();
 
   useEffect(() => {
     const role = user?.role || "guest";
     document.documentElement.dataset.role = role;
   }, [user?.role]);
+
+  useEffect(() => {
+    sidebar.close();
+  }, [location.pathname]);
 
   return (
     <div className="relative flex h-[100dvh] overflow-hidden">

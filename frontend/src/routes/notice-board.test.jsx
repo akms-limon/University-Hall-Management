@@ -106,7 +106,7 @@ describe("Notice board routes", () => {
     await waitFor(() => {
       expect(noticeApi.listMine).toHaveBeenCalled();
     }, { timeout: 4000 });
-    expect(await screen.findByText(/notice board/i, {}, { timeout: 10000 })).toBeInTheDocument();
+    expect(await screen.findByRole("option", { name: /all categories/i }, { timeout: 4000 })).toBeInTheDocument();
   });
 
   it("renders staff notice detail and fetches accessible notice", async () => {
