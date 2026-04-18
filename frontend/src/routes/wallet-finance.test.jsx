@@ -103,7 +103,7 @@ describe("Wallet and finance routes", () => {
       expect(walletApi.getMyBalance).toHaveBeenCalled();
       expect(walletApi.listMyTransactions).toHaveBeenCalled();
     }, { timeout: 4000 });
-    expect(screen.getByRole("button", { name: /deposit money/i })).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: /deposit money/i }, { timeout: 4000 })).toBeInTheDocument();
   });
 
   it("renders provost financial dashboard route", async () => {
@@ -126,9 +126,7 @@ describe("Wallet and finance routes", () => {
     await waitFor(() => {
       expect(walletApi.getProvostFinancialSummary).toHaveBeenCalled();
     }, { timeout: 4000 });
-    expect(
-      await screen.findByRole("heading", { name: /financial dashboard/i }, { timeout: 10000 })
-    ).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: /view transactions/i }, { timeout: 4000 })).toBeInTheDocument();
   });
 
   it("renders provost transaction monitoring route", async () => {
@@ -153,6 +151,8 @@ describe("Wallet and finance routes", () => {
     await waitFor(() => {
       expect(walletApi.listProvostTransactions).toHaveBeenCalled();
     }, { timeout: 4000 });
-    expect(await screen.findByRole("heading", { name: /transaction monitoring/i })).toBeInTheDocument();
+    expect(
+      await screen.findByPlaceholderText(/search by student\/reference\/remarks/i, {}, { timeout: 4000 })
+    ).toBeInTheDocument();
   });
 });

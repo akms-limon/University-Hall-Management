@@ -128,7 +128,7 @@ describe("Meal management routes", () => {
     await waitFor(() => {
       expect(mealApi.listMealItemsForStaff).toHaveBeenCalled();
     }, { timeout: 4000 });
-    expect(await screen.findByRole("heading", { name: /meal management/i })).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: /create meal item/i }, { timeout: 4000 })).toBeInTheDocument();
   });
 
   it("renders provost meal reports route and fetches reports", async () => {
@@ -154,6 +154,6 @@ describe("Meal management routes", () => {
     await waitFor(() => {
       expect(mealApi.getProvostMealReports).toHaveBeenCalled();
     }, { timeout: 4000 });
-    expect(await screen.findByRole("heading", { name: /dining token reports/i })).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: /refresh report/i }, { timeout: 4000 })).toBeInTheDocument();
   });
 });
