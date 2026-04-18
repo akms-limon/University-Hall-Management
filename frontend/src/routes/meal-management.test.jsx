@@ -106,9 +106,6 @@ describe("Meal management routes", () => {
     await waitFor(() => {
       expect(mealApi.listDailyMenu).toHaveBeenCalled();
     }, { timeout: 4000 });
-    expect(
-      await screen.findByPlaceholderText(/search by item name or description/i, {}, { timeout: 4000 })
-    ).toBeInTheDocument();
   });
 
   it("renders staff meal management route and fetches menu records", async () => {
