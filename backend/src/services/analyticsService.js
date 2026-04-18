@@ -90,6 +90,9 @@ function sumItems(items, field) {
 export const analyticsService = {
   async getProvostDashboardSummary(query) {
     const range = resolveRange(query);
+    // Do not derive "today" from end-of-day range boundaries.
+    // On UTC runners that can shift to the next Asia/Dhaka day.
+    const diningTodayDate = query.date || query.to || new Date();
 
     const [
       totalStudents,
@@ -155,7 +158,7 @@ export const analyticsService = {
           },
         },
       ]),
-      walletService.getDiningTodaySummary({ date: range.to }),
+      walletService.getDiningTodaySummary({ date: diningTodayDate }),
       walletService.getDiningDateSummary({ from: range.from, to: range.to }),
       walletService.getProvostFinancialSummary({ from: range.from, to: range.to }),
       Transaction.aggregate([
@@ -315,7 +318,7 @@ export const analyticsService = {
 
   async getStaffDiningSummary(query) {
     const range = resolveRange(query);
-    const today = await walletService.getDiningTodaySummary({ date: query.date || range.to });
+    const today = await walletService.getDiningTodaySummary({ date: query.date || query.to || new Date() });
     const dateWise = await walletService.getDiningDateSummary({ from: range.from, to: range.to });
 
     return {
